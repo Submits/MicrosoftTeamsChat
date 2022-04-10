@@ -1,0 +1,359 @@
+<html>
+    <head>
+        <title>Microsoft Teams</title>
+        <link rel="icon" type="image/x-icon" href="https://statics.teams.cdn.office.net/hashed/favicon/prod/favicon-9e2b8f1.ico">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb-min.js"></script>
+ <script src="dashboard.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <style>
+          body{
+    margin: 0;
+    background-color: #0a0a0a;
+    color: white;
+}
+
+.body{
+    margin: auto;
+    width: 90%;
+    height: 100vh;
+    
+   
+}
+*{
+    font-family: 'Segoe UI';
+    margin: 0;
+    transition: all .3s ease;
+}
+
+
+button{
+    border: 1px solid gray;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 13px;
+    transition: all .3s ease;
+}
+button:hover{
+    font-size: 14px;
+    background-color: #d1d1d1;
+}
+
+.wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+.navbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #1f1f1f;
+  height: 50px;
+  border-bottom: 1px solid #030303;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-overflow: ellipsis;
+  z-index: 999;
+}
+
+.navbar2 {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #141414;
+  height: 50px;
+  border-bottom: 1px solid #030303;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-overflow: ellipsis;
+  
+}
+
+.left {
+  flex: 0 0 20%;
+  height: 100vh;;
+  overflow-y: auto;
+overflow-x: hidden;
+background-color: #141414;
+}
+
+.right {
+  flex: 1;
+  background-color: #1f1f1f;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+overflow-x: hidden;
+height: 100vh;
+position: relative;
+  
+}
+
+h2{
+    font-size: 20px;
+}
+
+.messageDiv{
+  
+    padding: 10px;
+    display: flex;
+    cursor: pointer;
+}
+.messageDiv:hover{
+  background-color: #292929; 
+}
+
+.messageImage {
+  flex: 0 0 15%;
+  overflow-y: auto;
+overflow-x: hidden;
+padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.messageContent {
+  flex: 1;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-overflow: ellipsis;
+    overflow: hidden;
+}
+  
+
+
+.userImage{
+    width: 100%;
+    border-radius: 50%;
+
+    
+}
+
+.usernameHeader{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 600;
+}
+
+.messageMessage{
+    word-break: break-all; 
+    font-size: 15px;
+}
+
+.textInput{
+    
+    position: fixed;
+    bottom: 0px;
+    width: 70%;
+    padding-bottom: 20px;
+    padding: 1%;
+    background-color: #1f1f1f;
+    
+}
+
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    background: #7a7a7a;
+    border-radius: 5px;
+;
+
+}
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+.messageFrom{
+    background-color: #292929;
+    border-radius: 5px;
+    float: left;
+    padding: 10px;
+    max-width: 80%;
+    clear:both;
+    word-break: break-all;
+    margin-bottom: 10px;
+}
+
+.messageTo{
+    background-color: #323249;
+    border-radius: 5px;
+    float: right;
+    padding: 10px;
+    max-width: 80%;
+    clear:both;
+    margin-bottom: 10px;
+    word-break: break-all;
+}
+
+.messageFromName{
+    
+    color: #909090;
+    font-size: 14px;
+}
+
+.messageFromDate{
+    
+    color: #909090;
+    font-size: 14px;
+}
+
+.navbarImage{
+    vertical-align: middle;
+    height: 80%;
+    margin-right: 20px;
+    border-radius: 50%;
+    border: none;
+    
+}
+
+.msgInput{
+
+    background-color: #292929;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    height: 50px;
+    color: white;
+    font-size: 15px;
+    resize: vertical;
+    font-family: 'Segoe UI';
+    margin-bottom: 10px;
+}
+
+
+button{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7.5px;
+    padding-bottom: 7.5px;
+    background-color: #5b5fc7;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: #5056b1;
+}
+
+img{
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #292929;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+input{
+
+width: 100%;
+box-sizing: border-box;
+background-color: #3e3e3e;
+border: none;
+border-radius: 2px;
+height: 30px;
+color: white;
+margin-top: 5px;
+}
+
+    </style>
+  <body onload="load()">
+    <div class="body">
+        <div class="wrapper">
+            <div class="left">
+                <div class="navbar2">
+                    <h2>Chat</h2>
+                    <button onclick="openModal()" style="position: absolute; right: 10; border-radius: 5%; padding: 8px;"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button onclick="logOut()" style="position: absolute; right: 50; border-radius: 5%; padding: 8px;"><i class="fa-solid fa-right-from-bracket"></i></button>
+                </div> 
+                
+                <div id="messages">
+                
+
+                </div>
+               
+            </div>
+            <div id="right" class="right">
+                <div class="navbar">
+                    <img id="chatImage" class="navbarImage">
+                    <h2 id="chatName">Conversation</h2>
+                    
+                </div> 
+
+               
+                
+                <div id="msgList" style="padding: 20px; overflow-y: auto;  position: relative; padding-bottom: 150px;">
+
+                    
+
+      
+                        
+                </div>
+                <div id="textInput" class="textInput">
+                    <textarea id="messageText" class="msgInput"></textarea>
+                    <button id="send">Send</button>
+                </div> 
+                
+            </div>
+        </div>      
+
+    </div>
+
+    <div id="createDmModal" class="modal">
+
+        <div class="modal-content">
+          <span onclick="closeModal()" class="close">&times;</span><br>
+          <h2>Create a Direct Message</h2><br>
+          <input type="text" id="userForDm" placeholder="Enter a username (Case Sensitive)..."><br><br>
+          <button onclick="createDm()">Create</button>
+        </div>
+      
+      </div>
+
+
+  </body>
+</html>

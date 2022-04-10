@@ -1,0 +1,33 @@
+<head>
+    <title>Microsoft Teams</title>
+    <link rel="icon" type="image/x-icon" href="https://statics.teams.cdn.office.net/hashed/favicon/prod/favicon-9e2b8f1.ico">
+</head>
+<style>
+    *{
+        font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    }
+</style>
+<h1>Microsoft Teams Self-Hosting Tutorial</h1>
+<p>Tutorial on how to create a custom Microsoft Teams Chat database.</p>
+<h2>Fauna Setup</h2>
+<p>
+    &bull; Create a <a href="https://fauna.com">FaunaDB</a> database with name 'Teams', and set the Region Group to 'Europe (EU)'<br>
+    &bull; Create a collection in the database with the name 'users'<br>
+    &bull; Create an index for the collection with the name 'user_by_name' and make the term 'data.username'<br>
+    &bull; Create an API key for your database in the 'Security' tab (keep this saved somewhere)<br>
+</p>
+
+<h2>Code Setup</h2>
+<p>
+    &bull; Go to <a href="https://github.com/submits/MicrosoftTeamsChat">https://github.com/submits/MicrosoftTeamsChat</a><br>
+    &bull; Download the project as a .zip, then extract it<br>
+    &bull; In both the 'authHandler.js' and 'dashboard.js' files, update the 'secret' in the first few lines of code with the API key you generated<br>
+    &bull; Save the files, and the simply host them using your host of choice<br>
+</p>
+
+
+<h2>Usage</h2>
+<p>
+    &bull; Once up and running, the signup/login page can be accessed through 'https://your.domain.here/auth'<br>
+    &bull; This page will be at the index directory, but it isn't needed and can be changed/removed<br>
+</p>

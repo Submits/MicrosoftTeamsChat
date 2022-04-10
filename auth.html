@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Microsoft Teams</title>
+        <link rel="icon" type="image/x-icon" href="https://statics.teams.cdn.office.net/hashed/favicon/prod/favicon-9e2b8f1.ico">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb-min.js"></script>
+ <script src="authHandler.js"></script>
+    </head>
+    <style>
+        body{
+    position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #1f1f1f;
+  color: white;
+  width: 100vw;
+  overflow-x:hidden
+}
+
+.loginDiv{
+    background-color: #292929;   
+    padding: 20px;
+    width: 40%;
+    margin: auto;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    
+    
+}
+
+h1{
+    text-align: center;
+    font-size: 28px;
+}
+
+label{
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+input{
+
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #3e3e3e;
+    border: none;
+    border-radius: 2px;
+    height: 25px;
+    color: white;
+    margin-top: 5px;
+}
+
+.inputDiv{
+    width: 90%;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+hr{
+    width: 80%;
+    margin: auto;
+}
+
+*{
+
+    transition: all .3s ease;
+    font-family: "Segoe UI",system-ui,"Apple Color Emoji","Segoe UI Emoji",sans-serif;
+}
+
+button{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7.5px;
+    padding-bottom: 7.5px;
+    background-color: #5b5fc7;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: #5056b1;
+    font-size: calc(90%);
+}
+    </style>
+    <body>
+        <div class="loginDiv">
+            <h1>Sign Up or Log In</h1>
+            <hr><br>
+            <div class="inputDiv">
+                <label>Username</label>
+                <input id="username" type="text">
+                <br><br>
+                <label>Password</label>
+                <input id="password" type="password"><br><br>
+                <button onclick="signUp()">Sign Up</button>
+                <button onclick="signIn()">Log In</button>
+            </div>
+        </div>
+    </body>
+</html>
